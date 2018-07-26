@@ -2,17 +2,17 @@ package com.company;
 
 public abstract class Constants {
 
-    public static final String add="ADD";
-    public static final String delete="DELETE";
-    public static final String search="SEARCH";
-    public static final String next="NEXT";
-    public static final String previous="PREVIOUS";
-    public static final String min="MIN";
-    public static final String max="MAX";
-    public static final String inorder="INORDER";
-    public static final String preorder="PREORDER";
-    public static final String postorder="POSTORDER";
-    public static final String mid="MID";
+    public static final String INSERT="insert";
+    public static final String DELETE="delete";
+    public static final String SEARCH="search";
+    public static final String NEXT="next";
+    public static final String PREVIOUS="prev";
+    public static final String MIN="min";
+    public static final String MAX="max";
+    public static final String INORDER="inorder";
+    public static final String PREORDER="preorder";
+    public static final String POSTORDER="postorder";
+    public static final String MID="mid";
 }
 
 

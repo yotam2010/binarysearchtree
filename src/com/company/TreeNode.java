@@ -65,4 +65,8 @@ public class TreeNode {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Student: "+getName()+" - "+getId();
+    }
 }
