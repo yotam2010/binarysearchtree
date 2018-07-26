@@ -18,13 +18,12 @@ public class BinarySearchTree {
         while (temp != null && !found) {
             p = temp;
             if (id < temp.getId()) {
-                if(isLeftWire(temp))
+                if (isLeftWire(temp))
                     found = true;
                 temp = temp.getLeftChild();
-            }
-            else {
-                if(isRightWire(temp))
-                    found=true;
+            } else {
+                if (isRightWire(temp))
+                    found = true;
                 temp = temp.getRightChild();
             }
         }
@@ -42,54 +41,147 @@ public class BinarySearchTree {
         newStudent.setLeftChild(predecessor(newStudent));
         newStudent.setRightChild(successor(newStudent));
 
+        updateMid(newStudent, Constants.INSERT);
+
     }
     //END INSERT
 
-    public TreeNode search(int id){
+    public TreeNode getMid() {
+        return mid;
+    }
+
+    private void updateMid(TreeNode node, String command) {
+
+        if (command.equals(Constants.INSERT)) {
+
+            if (mid == null)
+                mid = node;
+            else {
+                if (mid.getId() < node.getId()) {
+                    if (nodeCounter == 1) {
+                        mid = successor(mid);
+                        nodeCounter--;
+                    } else
+                        nodeCounter++;
+                } else {
+                    if (nodeCounter == 0) {
+                        mid = predecessor(mid);
+                        nodeCounter++;
+                    } else
+                        nodeCounter--;
+                }
+
+            }
+
+        } else if (command.equals(Constants.DELETE)) {
+            if (mid == node)
+                if (nodeCounter == 1) {
+                    mid = successor(mid);
+                    nodeCounter--;
+                } else {
+                    mid = predecessor(mid);
+                    nodeCounter++;
+                }
+            else {
+                if (mid.getId() < node.getId()) {
+                    if (nodeCounter == 1)
+                        nodeCounter--;
+                    else {
+                        mid = predecessor(mid);
+                        nodeCounter++;
+                    }
+                } else {
+                    if (nodeCounter == 1) {
+                        nodeCounter--;
+                        mid = successor(mid);
+                    } else
+                        nodeCounter++;
+                }
+            }
+        }
+    }
+
+    public TreeNode delete(TreeNode node) {
+        if (node == null)
+            return null;
+
+        updateMid(node, Constants.DELETE);
+
+        TreeNode replacement = null;
+        TreeNode temp = null;
+        if (isLeftWire(node) || isRightWire(node))
+            replacement = node;
+        else
+            replacement = successor(node);
+        if (isLeaf(replacement))
+            temp = null;
+        else if (!isLeftWire(replacement))
+            temp = replacement.getLeftChild();
+        else
+            temp = replacement.getRightChild();
+        if (temp != null)
+            temp.setParent(replacement.getParent());
+        if (replacement.getParent() == null)
+            root = temp;
+        else if (replacement == replacement.getParent().getLeftChild())
+            replacement.getParent().setLeftChild(temp);
+        else
+            replacement.getParent().setRightChild(temp);
+
+        if (replacement != node) {
+            node.setId(replacement.getId());
+            node.setName(replacement.getName());
+        }
+
+        return replacement;
+
+    }
+
+    public TreeNode search(int id) {
         TreeNode temp = root;
-        while (temp!=null){
-            if(temp.getId()==id)
+        while (temp != null) {
+            if (temp.getId() == id)
                 return temp;
-            if(temp.getId()<id){
-                if(isRightWire(temp))
+            if (temp.getId() < id) {
+                if (isRightWire(temp))
                     return null;
                 else
-                    temp=temp.getRightChild();
+                    temp = temp.getRightChild();
             } else {
-                if(isLeftWire(temp))
+                if (isLeftWire(temp))
                     return null;
                 else
-                    temp=temp.getLeftChild();
+                    temp = temp.getLeftChild();
             }
         }
         return temp;
     }
 
     public TreeNode successor(TreeNode node) {
-        if(node==null)
+        if (node == null)
             return null;
-    if(!isRightWire(node))
-        return minimum(node.getRightChild());
-    TreeNode nodeSuccessor = node.getParent();
+        if (!isRightWire(node))
+            return minimum(node.getRightChild());
+        TreeNode nodeSuccessor = node.getParent();
 
-    while (nodeSuccessor!=null && node==nodeSuccessor.getRightChild()){
-        node=nodeSuccessor;
-        nodeSuccessor=nodeSuccessor.getParent();
-    }
+        while (nodeSuccessor != null && node == nodeSuccessor.getRightChild()) {
+            node = nodeSuccessor;
+            nodeSuccessor = nodeSuccessor.getParent();
+        }
 
-    return nodeSuccessor;
+        return nodeSuccessor;
     }
 
     public TreeNode predecessor(TreeNode node) {
-        if(node==null)
+        if (node == null)
             return null;
-        if(!isLeftWire(node))
+        if (!isLeftWire(node))
             return maximum(node.getLeftChild());
         TreeNode nodePredecessor = node.getParent();
 
-        while (nodePredecessor!=null && node==nodePredecessor.getLeftChild()){
-            node=nodePredecessor;
-            nodePredecessor=nodePredecessor.getParent();
+        while (nodePredecessor != null && node == nodePredecessor.getLeftChild()) {
+            node = nodePredecessor;
+            nodePredecessor = nodePredecessor.getParent();
         }
         return nodePredecessor;
     }
@@ -144,6 +236,7 @@ public class BinarySearchTree {
             System.out.print(node.getId() + " -> ");
         }
     }
+
     public TreeNode minimum(TreeNode node) {
         TreeNode min = node;
         while (!isLeftWire(min))
@@ -159,7 +252,7 @@ public class BinarySearchTree {
     }
 
     public TreeNode minimum() {
-       return minimum(root);
+        return minimum(root);
     }
 
     public TreeNode maximum() {

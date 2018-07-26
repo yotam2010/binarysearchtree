@@ -19,6 +19,21 @@ public abstract class Action {
         }
     }
 
+    public static TreeNode delete(String text,BinarySearchTree tree){
+        TreeNode replacementNode= null;
+        try{
+            int id = Integer.parseInt(text.substring(text.indexOf('(')+1,text.indexOf(')')));
+            if(!idValidation(id)){
+                System.out.println("invalid input.");
+            }else{
+                replacementNode = tree.delete(tree.search(id));
+            }
+        }catch (Exception e){
+            System.out.println("invalid input - syntax error.");
+        }
+        return replacementNode;
+    }
+
     public static TreeNode next(String text, BinarySearchTree tree){
         TreeNode nodeSuccessor = null;
         try{

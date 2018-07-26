@@ -44,12 +44,15 @@ public class Main {
                 Action.insert(text,tree);
                 break;
             case Constants.DELETE:
+                result = Action.delete(text,tree);
+                System.out.println((result==null)?"the node could not be deleted":result);
                 break;
             case Constants.SEARCH:
                  result = Action.search(text,tree);
                 System.out.println((result==null)?"not found":result);
                 break;
             case Constants.MID:
+                System.out.println(tree.getMid());
                 break;
             case Constants.MIN:
                 System.out.println(tree.minimum());
