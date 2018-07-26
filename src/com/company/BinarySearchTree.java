@@ -11,6 +11,7 @@ public class BinarySearchTree {
         nodeCounter = 0;
         mid = null;
     }
+    //END CONSTRUCTOR
 
     public void insert(int id, String name) {
         TreeNode newStudent = new TreeNode(id, name), p = null, temp = root;
@@ -49,6 +50,7 @@ public class BinarySearchTree {
     public TreeNode getMid() {
         return mid;
     }
+    //END GET MID
 
     private void updateMid(TreeNode node, String command) {
 
@@ -100,6 +102,7 @@ public class BinarySearchTree {
             }
         }
     }
+    //END UPDATE MID
 
     public TreeNode delete(TreeNode node) {
         if (node == null)
@@ -136,6 +139,7 @@ public class BinarySearchTree {
         return replacement;
 
     }
+    //END DELETE
 
     public TreeNode search(int id) {
         TreeNode temp = root;
@@ -156,6 +160,7 @@ public class BinarySearchTree {
         }
         return temp;
     }
+    //END SEARCH
 
     public TreeNode successor(TreeNode node) {
         if (node == null)
@@ -171,6 +176,7 @@ public class BinarySearchTree {
 
         return nodeSuccessor;
     }
+    //END SUCCESSOR
 
     public TreeNode predecessor(TreeNode node) {
         if (node == null)
@@ -185,6 +191,7 @@ public class BinarySearchTree {
         }
         return nodePredecessor;
     }
+    //END PREDECESSOR
 
     public void inorder() {
         System.out.println();
@@ -202,6 +209,7 @@ public class BinarySearchTree {
                 inorder(node.getRightChild());
         }
     }
+    //END INORDER
 
     public void preorder() {
         System.out.println();
@@ -219,6 +227,7 @@ public class BinarySearchTree {
                 preorder(node.getRightChild());
         }
     }
+    //END PREORDER
 
     public void postorder() {
         System.out.println();
@@ -236,6 +245,7 @@ public class BinarySearchTree {
             System.out.print(node.getId() + " -> ");
         }
     }
+    //END POSTORDER
 
     public TreeNode minimum(TreeNode node) {
         TreeNode min = node;
@@ -243,6 +253,7 @@ public class BinarySearchTree {
             min = min.getLeftChild();
         return min;
     }
+    //END NODE MIN
 
     public TreeNode maximum(TreeNode node) {
         TreeNode max = node;
@@ -250,30 +261,36 @@ public class BinarySearchTree {
             max = max.getRightChild();
         return max;
     }
+    //END NODE MAX
 
     public TreeNode minimum() {
         return minimum(root);
     }
+    //END TREE MIN
 
     public TreeNode maximum() {
         return maximum(root);
     }
+    //END TREE MAX
 
     private boolean isLeaf(TreeNode node) {
         return isLeftWire(node) && isRightWire(node);
     }
+    //END LEAF
 
     private boolean isLeftWire(TreeNode node) {
         if (node.getLeftChild() == null || node.getLeftChild().getParent() != node)
             return true;
         return false;
     }
+    //END LEFT WIRE
 
     private boolean isRightWire(TreeNode node) {
         if (node.getRightChild() == null || node.getRightChild().getParent() != node)
             return true;
         return false;
     }
+    //END RIGHT WIRE
 
 
 }
