@@ -9,7 +9,7 @@ public abstract class Action {
             int id = Integer.parseInt(text.substring(text.indexOf('(') + 1, text.indexOf(',')));
             String name = text.substring(text.indexOf(',') + 1, text.indexOf(')'));
 
-        if(!idValidation(id) || !nameValidation(name)){
+        if(!nameValidation(name)){
             System.out.println("invalid input.");
         }else{
             tree.insert(id,name);
@@ -23,11 +23,9 @@ public abstract class Action {
         TreeNode replacementNode= null;
         try{
             int id = Integer.parseInt(text.substring(text.indexOf('(')+1,text.indexOf(')')));
-            if(!idValidation(id)){
-                System.out.println("invalid input.");
-            }else{
+
                 replacementNode = tree.delete(tree.search(id));
-            }
+
         }catch (Exception e){
             System.out.println("invalid input - syntax error.");
         }
@@ -38,11 +36,9 @@ public abstract class Action {
         TreeNode nodeSuccessor = null;
         try{
         int id = Integer.parseInt(text.substring(text.indexOf('(')+1,text.indexOf(')')));
-        if(!idValidation(id)){
-            System.out.println("invalid input.");
-        }else{
+
             nodeSuccessor = tree.successor(tree.search(id));
-        }
+
         }catch (Exception e){
             System.out.println("invalid input - syntax error.");
         }
@@ -54,11 +50,9 @@ public abstract class Action {
         TreeNode nodePredecessor = null;
         try{
         int id = Integer.parseInt(text.substring(text.indexOf('(')+1,text.indexOf(')')));
-        if(!idValidation(id)){
-            System.out.println("invalid input.");
-        }else{
+
             nodePredecessor = tree.predecessor(tree.search(id));
-        }
+
     }catch (Exception e){
         System.out.println("invalid input - syntax error.");
     }
@@ -69,23 +63,20 @@ public abstract class Action {
         TreeNode resultNode = null;
         try{
         int id = Integer.parseInt(text.substring(text.indexOf('(')+1,text.indexOf(')')));
-        if(!idValidation(id)){
-            System.out.println("invalid input.");
-        }else{
+
             resultNode = tree.search(id);
-        }
     }catch (Exception e){
         System.out.println("invalid input - syntax error.");
     }
         return resultNode;
     }
 
-    private static boolean idValidation(int id) {
-        //we could add more tests here to validate the id.
-        if(id<100000000 || id>999999999)
-            return false;
-        return true;
-    }
+//    private static boolean idValidation(int id) {
+//        //we could add more tests here to validate the id.
+//        if(id<100000000 || id>999999999)
+//            return false;
+//        return true;
+//    }
 
     private static boolean nameValidation(String name) {
         //we could add more tests here to validate the id.
