@@ -15,6 +15,10 @@ public class BinarySearchTree {
 
     public void insert(int id, String name) {
         TreeNode newStudent = new TreeNode(id, name), p = null, temp = root;
+        if(search(id)!=null){
+            System.out.println("Student with the id "+id+" already been added.");
+            return;
+        }
         boolean found = false;
         while (temp != null && !found) {
             p = temp;
@@ -110,8 +114,8 @@ public class BinarySearchTree {
 
         updateMid(node, Constants.DELETE);
 
-        TreeNode replacement = null;
-        TreeNode temp = null;
+        TreeNode replacement,temp;
+
         if (isLeftWire(node) || isRightWire(node))
             replacement = node;
         else
@@ -135,6 +139,8 @@ public class BinarySearchTree {
             node.setId(replacement.getId());
             node.setName(replacement.getName());
         }
+        if(root==null)
+            mid=null;
 
         return replacement;
 
@@ -249,7 +255,7 @@ public class BinarySearchTree {
 
     public TreeNode minimum(TreeNode node) {
         TreeNode min = node;
-        while (!isLeftWire(min))
+        while (node!=null&&!isLeftWire(min))
             min = min.getLeftChild();
         return min;
     }
@@ -257,7 +263,7 @@ public class BinarySearchTree {
 
     public TreeNode maximum(TreeNode node) {
         TreeNode max = node;
-        while (!isRightWire(max))
+        while (node!=null&&!isRightWire(max))
             max = max.getRightChild();
         return max;
     }
@@ -291,6 +297,21 @@ public class BinarySearchTree {
         return false;
     }
     //END RIGHT WIRE
+
+//    public void checkMethod_DELETE_ME(){
+//        while(root!=null){
+//            System.out.println("\n\n\n\n");
+//            inorder();
+//            delete(root);
+//            System.out.println("max:"+maximum());
+//            System.out.println("min:"+minimum());
+//            System.out.println("mid:"+mid);
+//            inorder();
+//            System.out.println("mid:"+mid);
+//            System.out.println("mid:"+mid);
+//            System.out.println("\n\n\n\n");
+//        }
+//    }
 
 
 }

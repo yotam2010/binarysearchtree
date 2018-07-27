@@ -54,28 +54,28 @@ public class Main {
                 break;
             case Constants.DELETE:
                 result = Action.delete(text,tree);
-                System.out.println((result==null)?"the node could not be deleted":result);
+                System.out.println((result==null)?"the node could not be deleted":"Deleted");
                 break;
             case Constants.SEARCH:
                  result = Action.search(text,tree);
-                System.out.println((result==null)?"not found":result);
+                System.out.println((result==null)?"not found":"Found: "+result);
                 break;
             case Constants.MID:
-                System.out.println(tree.getMid());
+                System.out.println("Middle: "+tree.getMid());
                 break;
             case Constants.MIN:
-                System.out.println(tree.minimum());
+                System.out.println("Minimum: "+tree.minimum());
                 break;
             case Constants.MAX:
-                System.out.println(tree.maximum());
+                System.out.println("Maximum: "+tree.maximum());
                 break;
             case Constants.NEXT:
                  result = Action.next(text,tree);
-                System.out.println((result==null)?"don't have successor":result);
+                System.out.println((result==null)?"don't have successor":"successor: "+result);
                 break;
             case Constants.PREVIOUS:
                 result = Action.prev(text,tree);
-                System.out.println((result==null)?"don't have predecessor":result);
+                System.out.println((result==null)?"don't have predecessor":"predecessor: "+result);
                 break;
             case Constants.INORDER:
                 tree.inorder();
@@ -92,7 +92,7 @@ public class Main {
             case Constants.HELP:
                 help();
                 break;
-            default: System.out.println(command+", is not valid command");
+            default: System.out.println("'"+command+"' - is not valid command");
         }
     }
 
@@ -117,7 +117,7 @@ public class Main {
         } catch (IOException e) {
             System.out.println("couldn't read the file.");
         }
-        return new String(encoded, encoding);
+        return new String(encoded, encoding).replace("\r\n","");
 
     }
 }

@@ -89,7 +89,7 @@ public abstract class Action {
 
     private static boolean nameValidation(String name) {
         //we could add more tests here to validate the id.
-        if(name.length()<2 || !name.matches("[a-zA-Z]+"))
+        if(name.length()<2 || !name.matches("[a-zA-Z ]+"))
             return false;
         return true;
     }
